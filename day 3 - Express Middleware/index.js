@@ -1,48 +1,31 @@
 const express = require("express");
-
 const app = express();
 
-app.use(logger);
-
-app.get("/books", logger, (req, res) => {
-  const data = require("./book.json");
-  return res.send({ route: "/books", authors: req.authors });
-  // console.log("data: ", data);
-});
-
-
-app.get("/library", store("book"), (req, res) => {
-  return res.send("Fetching all books");
-});
-
-app.get("/books/:Title_of_Book", store("book"), (req, res) => {
-  const data = require("./books.json");
-  // console.log("data: ", data);
-  res.send(data);
-  return res.send("Fetching all books");
-});
-
-function store(author) {
-  return function logger(req, res, next) {
-    if (author == "book") {
-      return next();
-    }
-    return res.send("book not found");
-  };
-}
-
-function logger(req, res, next) {
-  if (req.path === "/books") {
-    req.role = "user";
-  } else if (req.path === "/admin") {
-    req.role = "admin";
-  } else {
-    req.role = "otherPerson";
-  }
-  console.log("fetched data");
+//For Single book data...
+const oneBook = (req, res, next) => {
+  req.name = req.params.name;
+  console.log("Data for Single/One Book");
   next();
-}
+};
 
-app.listen(5600, () => {
-  console.log("port working successfully");
+app.get("/books/:name", oneBook, (req, res) => {
+  const data = require("./books.json");
+  res.send(data);
+  return res.send({ bookName: req.params.name });
+});
+
+// For Multiple Books...
+const books = (req, res, next) => {
+  console.log("Fetching All Books");
+  next();
+};
+
+app.get("/books", books, (req, res) => {
+  const data = require("./book1.json");
+  res.send(data);
+  return res.send("books");
+});
+
+app.listen(6100, () => {
+  console.log("Port working successfully");
 });
