@@ -35,3 +35,13 @@ db.users.find({"age": {$lte : "24"}}).pretty()
 db.users.find({"age": {$let : "24"}}).pretty() 
 
 db.users.find({"age": {$eq : "24"}}).pretty() 
+
+
+To delete the single or One database,
+>> db.users.remove({name: 'tom'}, true)
+
+To delete the DataBases (Many)
+>> db.users.remove({name: 'tom'})
+
+To remove all the documents from the collection
+>> db.users.remove();
