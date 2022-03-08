@@ -1,0 +1,37 @@
+To show the DataBases -- show dbs
+
+To get the DB or make the DB (Show a particular DB)
+>> use test
+
+To check for the db
+>> db
+
+To show the collection
+>> show collections
+
+Functions that can be used in the db
+>> db.test.help()
+
+To create collections
+>> db.createCollection("users")
+
+To insert into db
+>> db.students.insert({"name":"Tom", "age": 24})
+
+To insert Single Entry Only
+>> db.students.insertOne({"name":"Jerry", "age": 24})
+
+To insert Multiple Entries..
+>> db.students.insertMany([{"name":"Tom", "age": 24}, {"name":"Nicks", "age": 30}])
+
+To update the entry in db (here $set is IMPORTANT) + add it newly
+>> db.users.update({"first_name":"tom"}, {$set :{"tel":"1234556789"}})
+
+To update multiple entries in db
+>> db.users.updateMany({"first_name":"tom"}, {$set :{"tel":"1234556789"}})
+
+db.users.find({"age": {$lte : "24"}}).pretty()  
+
+db.users.find({"age": {$let : "24"}}).pretty() 
+
+db.users.find({"age": {$eq : "24"}}).pretty() 
