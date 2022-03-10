@@ -1,0 +1,37 @@
+1. Create the Movies data from (https://www.mockaroo.com/)
+2. Create movies table 
+3. use movies
+
+find all movies which are equal to movie_name
+>> db.movies.find({movie_name: {$eq:"Lemmy"}}).pretty() 
+
+find all movies which are not equal to movie_name
+>> db.movies.find({movies:{$not :{$eq :"Lemmy"}}}).pretty()  
+
+find all movies greater than and greater than equal to a budget
+>> db.movies.find({budget: {$gte : "$13786.52"}}).pretty()
+
+find all movies less than and less than equal to a budget
+>> db.movies.find({budget: {$lte : "$13786.52"}}).pretty() 
+
+find all movies that are produced after 2000 with budget greater than 10000 --> (AND)
+>> db.movies.find({$and: [{production_year:{$gt:2000}},{budget:{$gt:"$10000"}}]}).pretty()  
+
+find all movies that are produced after 2000 or budget greater than 10000 --> (OR)
+>> db.movies.find({$or: [{production_year:{$gt:2000}},{budget:{$gt:"$10000"}}]}).pretty() 
+
+find all movies that are neither produced after 2000 nor with budget greater than 10000.
+>> db.movies.find({$nor: [{production_year:{$gt:2000}},{budget:{$gt:"$10000"}}]}).pretty()
+
+find all movies that are not produced in 2000 or they do not have budget of 10000
+>> db.movies.find({$or: [{production_year:{$ne:2000}},{budget:{$lt:"$15000"}}]}).pretty() 
+
+find all movies that were produced from 2000 to 2010.
+>> db.movies.find({production_year : {$in : [2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010]}}).pretty()
+
+Sort all movies descending based on the production year and if the year is same then alphabetically for their movie_names
+>> db.movies.find({}).sort({production_year : -1, year: -1}).pretty() 
+
+in query 10 skip the first 10 entries and fetch the next 5
+>> db.movies.find({},{id:1,_id:0}).skip(10).limit(5).pretty() 
+
