@@ -8,7 +8,7 @@ router.get("", async (req, res) => {
   try {
     const submission = await Submission.find()
       .populate({
-        path: "batch_id",
+        path: "batchId", //evaluation
         select: "date_of_evaluation",
         _id: 0,
       })
@@ -25,7 +25,7 @@ router.get("/:id", async (req, res) => {
   try {
     const submission = await Submission.findById(req.params.id)
       .populate({
-        path: "batch_id",
+        path: "batchId",
         select: "date_of_evaluation",
         _id: 0,
       })

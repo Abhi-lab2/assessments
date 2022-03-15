@@ -12,11 +12,11 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/users", userController);
-app.use("/students", studentController);
+app.use("/user", userController);
+app.use("/student", studentController);
 app.use("/batch", batchController);
-app.use("/evaluations", evaluationController);
-app.use("/submissions", submissionController);
+app.use("/evaluation", evaluationController);
+app.use("/submission", submissionController);
 
 app.use("/evaluation", stdEval);
 
